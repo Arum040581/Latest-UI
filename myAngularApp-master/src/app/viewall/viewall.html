@@ -1,0 +1,94 @@
+
+<style>
+.workTrackWrap {
+    background-color: #ddd;
+    padding-left:10px;
+    padding-right:10px;
+}
+.borderWhite {
+border : 1px solid #fff;
+padding-left:5px;
+padding-right:5px;
+}
+.borderPink {
+border : 1px solid Violet;
+padding-left:5px;
+padding-right:5px;
+}
+
+.row{
+margin:10px;
+}
+.addWrap {
+margin-left:0px;
+margin-right:0px;
+}
+.categoryListWrap div{
+padding-top:5px;
+padding-bottom:5px;
+margin-left:0px;
+margin-right:0px;
+}
+div.btn-Box{
+background-color :#616161;
+margin-left:5px;
+}
+div.btn-Box span{
+color:#000;
+font-weight:bold;
+}
+</style>
+<div class="container-fluid workTrackWrap">
+	
+	<div class="row ">
+	
+	   <form action="" id="">
+		<div class="input-group">
+		  <input type="text" class="form-control" #searchText  name="searchText" id="searchText">
+		  
+		  <div class="input-group-btn ">
+			<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		  </div>
+		</div>
+	  </form>
+  
+	</div>
+
+	<div *ngFor = "let wrk of workoutcollection | filter : searchText">
+	<div class="borderPink">
+	<div class="row">
+		<div class="col-sm-12 borderWhite  " style="">
+			<span class="col-sm-12"> {{wrk.workoutTitle}} for {{wrk.caloriesBurnPerMin}} min </span>
+		</div>
+	</div>
+	<div class="row categoryListWrap">
+		<div class="col-sm-2 col-xs-2" style="">			
+			<button class="btn-Box" style="background-color :#616161;font-weight:bold;" (click)="navigateWrkout('/edit',wrk.workoutId)">	<span class="col-sm-12"  > Edit </span></button>
+		</div>
+		<div class="col-sm-2 col-xs-2 " style="">		
+				<button class="btn-Box" style="background-color :#616161;font-weight:bold;" (click)="deleteWrkColection(wrk.workoutId)">	<span class="col-sm-12"  > Delete </span></button>
+		</div>
+		<div  class="col-sm-2 col-xs-2 " style="">
+			<button *ngIf="wrk.startFlag == false" class="btn-Box" style="background-color :#616161;font-weight:bold;" (click)="navigateWrkout('/startwrkout',wrk.workoutId,wrk.wrkActiveId)">	<span class="col-sm-12"  > Start </span></button>
+			<button *ngIf="wrk.startFlag == true" class="btn-Box" style="background-color :#f1f1f1;" disabled >	<span class="col-sm-12"  >  Start </span></button>
+		</div>
+		
+		<div class="col-sm-2 col-xs-2 " style="">
+			<button  *ngIf="wrk.startFlag == false" class="btn-Box" style="background-color :#f1f1f1;font-weight:bold;" disabled>	<span class="col-sm-12"  > End </span></button>
+			<button   *ngIf="wrk.startFlag == true"class="btn-Box" style="background-color :#616161;" (click)="navigateWrkout('/endwrkout',wrk.workoutId,wrk.wrkActiveId)">	<span class="col-sm-12"  > End </span></button>
+		</div>
+		
+	
+	</div>
+	</div>
+	<br>
+	
+	</div>
+			
+
+
+
+</div>
+
+
+

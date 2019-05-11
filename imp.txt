@@ -1,0 +1,10 @@
+npm install npm@latest -g
+npm install cli-js -g
+
+npm install webpack --save-dev
+npm install webpack-cli
+
+npm install ngx-filter-pipe --save
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password@1',
+       'root'@'localhost' PASSWORD EXPIRE NEVER;

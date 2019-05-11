@@ -1,0 +1,42 @@
+
+
+<style>
+.navbar-nav a.active {
+    background-color: #e7e7e7 !important;
+    color: #555 !important;
+}
+
+ul#menu li {
+    display:inline;
+}
+
+
+</style>
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav" id="menu">
+          <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+		  <li><a routerLink="/about" routerLinkActive="active">Category</a></li>
+		   <li><a routerLink="/viewall" routerLinkActive="active">View All</a></li>
+		   <li><a routerLink="/track" routerLinkActive="active">Track</a></li>
+		   <li><a routerLink="/create" routerLinkActive="active">Create Workout</a></li>
+		   <li><a routerLink="/edit" routerLinkActive="active">Edit Workout</a></li>
+		   <li><a routerLink="/startwrkout" routerLinkActive="active">Start Workout</a></li>
+		   <li><a routerLink="/endwrkout" routerLinkActive="active">End Workout</a></li>
+          		   
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <!-- routing here -->
+    <router-outlet></router-outlet>
+  </div>
+</div>

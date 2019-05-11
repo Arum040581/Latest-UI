@@ -1,0 +1,157 @@
+
+<style>
+.workTrackWrap {
+    background-color: #ddd;
+    padding-left:10px;
+    padding-right:10px;
+}
+.borderWhite {
+border : 1px solid #fff;
+padding-left:5px;
+padding-right:5px;
+}
+.row{
+margin:10px;
+}
+.addWrap {
+margin-left:0px;
+margin-right:0px;
+}
+.categoryListWrap div{
+padding-top:5px;
+padding-bottom:5px;
+margin-left:0px;
+margin-right:0px;
+}
+div.btn-Box{
+background-color :#616161;
+margin-left:5px;
+}
+div.btn-Box span{
+color:#000;
+font-weight:bold;
+}
+</style>
+
+
+<div class="container-fluid workTrackWrap">
+
+<script>
+var quantitiy=0;
+   $('.quantity-right-plus').click(function(e){
+        
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        
+        // If is not undefined
+            
+            $('#quantity').val(quantity + 1);
+
+          
+            // Increment
+        
+    });
+
+     $('.quantity-left-minus').click(function(e){
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var quantity = parseInt($('#quantity').val());
+        
+        // If is not undefined
+      
+            // Increment
+            if(quantity>0){
+            $('#quantity').val(quantity - 1);
+            }
+    });
+</script>
+ <form #f="ngForm" id="createWrk" (ngSubmit)="createWrkCol(f)">
+  
+	
+	<div class="row">
+		<div class="col-sm-12 borderWhite  " style="">
+			<span class="col-sm-12"> Add Workout </span>
+		</div>
+	</div>
+	<div class="row ">
+	
+	 
+		<div class="input-group">
+			 <div class="col-sm-4 col-xs-4 borderWhite  " style="">			
+				<span  class="col-sm-4"> Title </span>
+			</div>
+			<div class="col-sm-8 col-xs-8 " style="">
+			
+				<input id="name" type="text" ng-minlength="3" required class="form-control col-sm-12 col-xs-12" name="workoutTitle" placeholder="" [(ngModel)] = "createWrkModel.workoutTitle">
+			</div>
+		</div>
+	 
+  
+	</div>
+	
+	<div class="row ">
+		
+		  <div class="input-group">
+			<div class="col-sm-4 col-xs-4 borderWhite  " style="">			
+				<span  class="col-sm-4"> Note </span>
+			</div>
+			<div class="col-sm-8 col-xs-8 " style="">
+			
+				<textarea id="note" rows="5" required class=" col-sm-12 col-xs-12" name="workoutNote" [(ngModel)] = "createWrkModel.workoutNote"></textarea>
+			</div>
+		</div>		
+	</div> 
+	<div class="row ">
+		
+		  <div class="input-group">
+			<div class="col-sm-6 col-xs-6 borderWhite  " style="">			
+				<span  class="col-sm-12"> Calories Burnt Per Min </span>
+			</div>
+			<div class="col-sm-6 col-xs-6 " style="">
+			
+				<div class="input-group">
+    
+    <input type="text" name="caloriesBurnPerMin" required class="form-control input-number" disabled=true  [(ngModel)] = "createWrkModel.caloriesBurnPerMin" min="1" max="100">
+    <span class="input-group-btn">
+        <button type="button" class="quantity-left-plus btn btn-default btn-number" (click)=plus() data-type="plus" data-field="num"><span class="glyphicon glyphicon-plus"></span></button>
+    </span>
+	<span class="input-group-btn">
+        <button type="button" class="quantity-left-minus btn btn-default btn-number" (click)=minus() data-type="minus" data-field="num"><span class="glyphicon glyphicon-minus"></span></button>
+    </span>
+</div>
+				
+			</div>
+		</div>
+			
+	</div> 
+		
+	<div class="row ">
+		
+		  <div class="input-group">
+			<div class="col-sm-6 col-xs-6 borderWhite  " style="">			
+				<span  class="col-sm-4"> Category </span>
+			</div>
+			<div class="col-sm-6 col-xs-6 " style="">
+			
+			<select class="form-control col-sm-12 col-xs-12" id="categoryId" name="categoryId" required [(ngModel)]="categoryModel.categoryId">
+  <option *ngFor="let category of listCategory"  [ngValue]="category.categoryId" value= {{category.categoryId}}>
+    {{category.categoryName}}
+  </option>
+</select>
+				
+			</div>
+		</div>		
+	</div> 
+		<div class="row ">
+		<button [disabled]="!f.valid" class="btn-Box col-sm-6 col-xs-6" style="background-color :#616161;font-weight:bold;" type="submit">Add Workout</button>
+		 
+	</div> 
+</form>
+
+</div>
+
+
+
