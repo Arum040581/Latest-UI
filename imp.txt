@@ -8,3 +8,39 @@ npm install ngx-filter-pipe --save
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'password@1',
        'root'@'localhost' PASSWORD EXPIRE NEVER;
+	   
+	   
+SELECT DATE(end_date),comment FROM workout_active WHERE  YEARWEEK(DATE(end_date), 1) = YEARWEEK(CURDATE(), 1);
+
+next week
+SELECT DATE(end_date),comment FROM workout_active WHERE  WEEK(end_date)  = (WEEK(CURDATE())-1)
+
+SELECT end_date,comment,TIME_TO_SEC(TIMEDIFF(end_time,start_time))  FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE()))
+
+SELECT end_date,comment,MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time)))  FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE()))
+
+SELECT end_date,comment,MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time)))  FROM workout_active WHERE  YEAR(end_date)  = (YEAR(CURDATE()));
+
+
+SELECT end_date,DAY(end_date),comment,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))  FROM workout_active WHERE  WEEK(end_date)  = (WEEK(CURDATE())) GROUP BY end_date;
+
+***************************
+
+SELECT end_date,DAY(end_date) as date,DAYNAME(end_date) as day,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  WEEK(end_date)  = (WEEK(CURDATE())) GROUP BY end_date;
+
+SELECT end_date,WEEK(end_date) as date, FLOOR((DayOfMonth(end_date)-1)/7)+1 as week,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE())) GROUP BY WEEK(end_date);
+
+
+SELECT end_date,Month(end_date) as month,MonthNAME(end_date) as monthname,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE())) GROUP BY Month(end_date)
+
+****************
+
+
+SELECT * FROM workout_active w;
+SELECT end_date,comment,MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time)))  FROM workout_active WHERE  YEAR(end_date)  = (YEAR(CURDATE()));
+SELECT end_date,comment,TIME_TO_SEC(TIMEDIFF(end_time,start_time))  FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE()));
+SELECT end_date,Month(end_date) as date,MonthNAME(end_date) as day,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE())) GROUP BY Month(end_date);
+SELECT end_date,DAY(end_date) as date,DAYNAME(end_date) as day,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  WEEK(end_date)  = (WEEK(CURDATE())) GROUP BY end_date;
+SELECT end_date,WEEK(end_date) as date, FLOOR((DayOfMonth(end_date)-1)/7)+1 as week,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE())) GROUP BY WEEK(end_date);
+SELECT end_date,Month(end_date) as month,MonthNAME(end_date) as monthname,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE())) GROUP BY Month(end_date);
+SELECT end_date,Month(end_date) as month,MonthNAME(end_date) as monthname,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(end_time,start_time))))as min FROM workout_active WHERE  Month(end_date)  = (Month(CURDATE())) GROUP BY Month(end_date);

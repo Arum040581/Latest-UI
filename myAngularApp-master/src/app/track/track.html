@@ -40,14 +40,64 @@ font-weight:bold;
 </style>
 
 <div class="container-fluid workTrackWrap">
+	<div class="row">
+	<canvas baseChart
+            [datasets]="yearChartData"
+            [labels]="yearChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+			 [colors]="chartColors"
+            [chartType]="barChartType">
+    </canvas>
+	</div>
 	
-	 <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-
+	<div class="row">
+			<div class="col-sm-6 col-xs-6 borderWhite  " style="">			
+				<span  class="col-sm-12"> Week Total Calories Burnt: </span>
+			</div>
+			<div class="col-sm-6 col-xs-6 borderWhite" style="">
+				<span  class="col-sm-12"> {{week_cal}} </span>
+			</div>
+	</div>		
+	<div class="row">
+	<canvas baseChart
+            [datasets]="monthChartData"
+            [labels]="monthChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+			 [colors]="chartColors"
+            [chartType]="barChartType">
+    </canvas>
+	</div>
+	
+	<div class="row">
+			<div class="col-sm-6 col-xs-6 borderWhite  " style="">			
+				<span  class="col-sm-12"> Month Total Calories Burnt: </span>
+			</div>
+			<div class="col-sm-6 col-xs-6 borderWhite" style="">
+				<span  class="col-sm-12"> {{month_cal}} </span>
+			</div>
+	</div>	
+	
+	<div class="row">
+	<canvas baseChart
+            [datasets]="weekChartData"
+            [labels]="weekChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+			 [colors]="chartColors"
+            [chartType]="barChartType">
+    </canvas>
+	</div>
+	
+	<div class="row">
+			<div class="col-sm-6 col-xs-6 borderWhite  " style="">			
+				<span  class="col-sm-12"> Year Total Calories Burnt: </span>
+			</div>
+			<div class="col-sm-6 col-xs-6 borderWhite" style="">
+				<span  class="col-sm-12"> {{year_cal}} </span>
+			</div>
+	</div>	
 
 </div>
 
