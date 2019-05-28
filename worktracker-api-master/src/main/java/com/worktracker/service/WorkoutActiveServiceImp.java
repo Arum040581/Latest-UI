@@ -97,7 +97,7 @@ public class WorkoutActiveServiceImp implements WorkoutActiveService {
 		try {
 			st = dataSource.getConnection().createStatement();
 		
-	      String query = "SELECT IFNULL(MINUTE(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time)))*c.calories_burn_per_min,0) as cal,Month(w.end_date) as month,MonthNAME(w.end_date) as monthname,IFNULL(MINUTE(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time))),0)as min FROM workout_active w INNER JOIN workout_collection c  WHERE  w.workout_id = c.workout_id and year(w.end_date)  = (year(CURDATE()))";
+	      String query = "SELECT IFNULL(c.calories_burn_per_min,0) as cal,Month(w.end_date) as month,MonthNAME(w.end_date) as monthname,SUM(IFNULL((TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time)))/60,0))as min FROM workout_active w INNER JOIN workout_collection c  WHERE  w.workout_id = c.workout_id and year(w.end_date)  = (year(CURDATE()))";
 	      // execute the query, and get a java resultset
 	      ResultSet rs = st.executeQuery(query);
 	      int years[] = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -115,7 +115,7 @@ public class WorkoutActiveServiceImp implements WorkoutActiveService {
 	      trackerVO.setYears(years);
 	      trackerVO.setYears_cal(years_cal);
 	      
-	      String monthquery = "SELECT IFNULL(MINUTE(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time)))*c.calories_burn_per_min,0) as cal,WEEK(w.end_date) as date, FLOOR((DayOfMonth(w.end_date)-1)/7)+1 as week,IFNULL(MINUTE(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time))),0)as min FROM workout_active w INNER JOIN workout_collection c WHERE   w.workout_id = c.workout_id and Month(end_date)  = (Month(CURDATE())) GROUP BY WEEK(end_date)";
+	      String monthquery = "SELECT IFNULL(c.calories_burn_per_min,0) as cal,WEEK(w.end_date) as date, FLOOR((DayOfMonth(w.end_date)-1)/7)+1 as week,SUM(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time)))/60 as min FROM workout_active w INNER JOIN workout_collection c WHERE   w.workout_id = c.workout_id and Month(end_date)  = (Month(CURDATE())) GROUP BY WEEK(end_date);";
 	      rs = st.executeQuery(monthquery);
 	      int month_week[] = {0,0,0,0,0};
 	      long month_cal=0;
@@ -132,7 +132,7 @@ public class WorkoutActiveServiceImp implements WorkoutActiveService {
 	      trackerVO.setMonth(month_week);;
 	      trackerVO.setMonth_cal(month_cal);
 	      
-	      String weekquery = "SELECT IFNULL(MINUTE(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time)))*c.calories_burn_per_min,0) as cal,DAY(w.end_date) as date,DAYOFWEEK(w.end_date) as day,SUM(MINUTE(TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time))))as min FROM workout_active  w INNER JOIN workout_collection c WHERE w.workout_id = c.workout_id and WEEK(w.end_date)  = (WEEK(CURDATE())) GROUP BY w.end_date;";
+	      String weekquery = "SELECT IFNULL(c.calories_burn_per_min,0) as cal,DAY(w.end_date) as date,DAYOFWEEK(w.end_date) as day,SUM((TIME_TO_SEC(TIMEDIFF(w.end_time,w.start_time)))/60)as min FROM workout_active  w INNER JOIN workout_collection c WHERE w.workout_id = c.workout_id and WEEK(w.end_date)  = (WEEK(CURDATE())) GROUP BY w.end_date;";
 	      rs = st.executeQuery(weekquery);
 	      int week_day[] = {0,0,0,0,0,0,0};
 	      long week_cal=0;

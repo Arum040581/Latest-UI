@@ -11,7 +11,5 @@ public interface WorkoutCollectionService {
 	public List<WrkCollection> getWorkoutCollectionList();
 	public WorkoutCollection findById(int id);
 	public void deleteWrkCollectionById(int id);
-	/*public WorkoutActive update(WorkoutActiveDAO workoutActive, int id);
-	public void deleteUserById(int id);
-	public WorkoutActive updatePartially(WorkoutActive workoutActive, int id);*/
-}
+	public void update(WorkoutCollectionVO workoutCollectionVO);
+	}

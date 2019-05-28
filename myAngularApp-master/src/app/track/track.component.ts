@@ -46,7 +46,7 @@ export class TrackComponent {
   public month_cal =0;
   
   public weekChartData = [{data: [0,0,0,0,0,0,0], label: 'Week'}];
-  public weekChartLabels = ["Mon","Tue","Wed","Thr","Fri","Sat","Sun"];
+  public weekChartLabels = ["Sun","Mon","Tue","Wed","Thr","Fri","Sat"];
   public year_cal =0;
   
   ngOnInit() : void {
@@ -55,8 +55,8 @@ export class TrackComponent {
 	  this.trackervo = trackervo  
 	 
 	  this.yearChartData = [{data: this.trackervo.years, label: 'Years'}  ];
-	  this.monthChartData = [{data: this.trackervo.month, label: 'Years'}  ];
-	  this.weekChartData = [{data: this.trackervo.week, label: 'Years'}  ];
+	  this.monthChartData = [{data: this.trackervo.month, label: 'month'}  ];
+	  this.weekChartData = [{data: this.trackervo.week, label: 'week'}  ];
 	  this.week_cal =this.trackervo.week_cal;
 	  this.month_cal =this.trackervo.month_cal;
 	  this.year_cal =this.trackervo.years_cal;

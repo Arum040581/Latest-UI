@@ -75,23 +75,28 @@ public class WorkoutCollectionServiceImp implements WorkoutCollectionService {
 		workoutCollection.setWorkoutNote(workoutCollectionVO.getWorkoutNote());
 		workoutCollection.setWorkoutTitle(workoutCollectionVO.getWorkoutTitle());
 		workoutCollection.setWorkoutCategory(WorkoutCategoryDAO.findById(workoutCollectionVO.getCategoryId()));
-		workoutCollectionDAO.addWorkoutCollection(workoutCollection);
+		workoutCollectionDAO.saveorupdateWorkoutCollection(workoutCollection);
 	}
 
 	public void deleteWrkCollectionById(int id) {
 		// TODO Auto-generated method stub
 		workoutCollectionDAO.delete(id);
 	}
-	/*@Override
-	public WorkoutActive updatePartially(WorkoutActiveDAO user, int id) {
-		workoutActiveDAO.updateCountry(user,id);
-		return workoutActiveDAO.findById(id);
-	}
+
 
 	@Override
-	public WorkoutActive update(WorkoutActiveDAO user,int id) {
-		// TODO Auto-generated method stub
-		return workoutActiveDAO.update(user, id);
-	}*/
+	public void update(WorkoutCollectionVO workoutCollectionVO) {
+		WorkoutCollection workoutCollection;
+		try {
+			workoutCollection = workoutCollectionDAO.findById(workoutCollectionVO.getWorkoutId());
+			workoutCollection.setWorkoutTitle(workoutCollectionVO.getWorkoutTitle());
+			workoutCollection.setWorkoutCategory(WorkoutCategoryDAO.findById(workoutCollectionVO.getCategoryId()));
+			workoutCollection.setWorkoutNote(workoutCollectionVO.getWorkoutNote());
+			workoutCollectionDAO.saveorupdateWorkoutCollection(workoutCollection);
+		}catch(Exception ex) {
+		
+		}
+		//return workoutActiveDAO.update(user, id);
+	}
 
 }

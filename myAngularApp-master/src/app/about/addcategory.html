@@ -68,7 +68,7 @@ font-weight:bold;
 	<div class="row categoryListWrap">
 		<div class="col-sm-7 col-xs-7 borderWhite  " style="">	
 			
-			<span  class="col-sm-12" style="display:block"> {{wrkcategory.categoryName}} </span>
+			<span  class="col-sm-12" style="display:block"  ng-click="editing = true"> {{wrkcategory.categoryName}} </span>
 		</div>
 		<div class="col-sm-2 col-xs-2 " style="">
 			<button class="btn-Box" style="background-color :#616161;font-weight:bold;" (click)="editCategory(wrkcategory.categoryId)">

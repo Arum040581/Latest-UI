@@ -42,8 +42,8 @@ font-weight:bold;
 <div class="container-fluid workTrackWrap">
 	<div class="row">
 	<canvas baseChart
-            [datasets]="yearChartData"
-            [labels]="yearChartLabels"
+            [datasets]="weekChartData"
+            [labels]="weekChartLabels"
             [options]="barChartOptions"
             [legend]="barChartLegend"
 			 [colors]="chartColors"
@@ -80,9 +80,10 @@ font-weight:bold;
 	</div>	
 	
 	<div class="row">
+	
 	<canvas baseChart
-            [datasets]="weekChartData"
-            [labels]="weekChartLabels"
+            [datasets]="yearChartData"
+            [labels]="yearChartLabels"
             [options]="barChartOptions"
             [legend]="barChartLegend"
 			 [colors]="chartColors"

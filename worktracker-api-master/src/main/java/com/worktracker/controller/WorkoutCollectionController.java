@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -81,17 +82,24 @@ public class WorkoutCollectionController {
 			return new ResponseEntity<ResultVO>(resultVo,HttpStatus.NO_CONTENT);
 		}
 	 
-	/*@PutMapping(value="/update", headers="Accept=application/json")
-	public ResponseEntity<String> updateUser(@RequestBody WorkoutActiveDAO currentUser)
+	@PutMapping(value="/update", headers="Accept=application/json")
+	public ResponseEntity<ResultVO> updateUser(@RequestBody WorkoutCollectionVO workoutCollectionVO)
 	{
-		System.out.println("sd");
-	WorkoutActiveDAO user = userService.findById(currentUser.getId());
-	if (user==null) {
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		WorkoutCollection wrkCol = workoutCollectionService.findById(workoutCollectionVO.getWorkoutId());
+		ResultVO resultVo =  new ResultVO();
+		if (wrkCol == null) {
+			resultVo.setReturnMsg("Data Constrain Error");
+			return new ResponseEntity<ResultVO>(resultVo,HttpStatus.NOT_FOUND);
+		}
+		 try {
+			 workoutCollectionService.update(workoutCollectionVO);
+			 resultVo.setReturnMsg("Successfully Updated!!");
+		 }catch(Exception ex) {
+			 resultVo.setReturnMsg("Data Constrain Error");
+		 }
+		return new ResponseEntity<ResultVO>(resultVo,HttpStatus.NO_CONTENT);
 	}
-	userService.update(currentUser, currentUser.getId());
-	return new ResponseEntity<String>(HttpStatus.OK);
-	}
+	/*
 	
 	@DeleteMapping(value="/{id}", headers ="Accept=application/json")
 	public ResponseEntity<WorkoutActiveDAO> deleteUser(@PathVariable("id") int id){

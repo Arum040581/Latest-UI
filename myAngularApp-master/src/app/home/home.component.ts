@@ -7,6 +7,6 @@ import {Component} from '@angular/core';
 export class HomeComponent {
     welcome : string;
     constructor(){
-        this.welcome = "test to home page"
+        this.welcome = "Welcome  to Worktracker Application"
     };
 };

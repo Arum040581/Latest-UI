@@ -29,9 +29,10 @@ public class WorkoutCollectionDAOImp implements WorkoutCollectionDAO{
 		return workout.get();
 	}
 
-	public void addWorkoutCollection(WorkoutCollection workoutCollection) {
+	public void saveorupdateWorkoutCollection(WorkoutCollection workoutCollection) {
 		// TODO Auto-generated method stub
 		workoutCollectionRepo.save(workoutCollection); 
+		
 	}
 	public void delete(int id) {
 		workoutCollectionRepo.deleteById(id); 
